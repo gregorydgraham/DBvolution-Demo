@@ -1,3 +1,5 @@
+package nz.co.gregs.dbvolutiondemo;
+
 
 import java.util.Date;
 import nz.co.gregs.dbvolution.DBRow;

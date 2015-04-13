@@ -1,3 +1,5 @@
+package nz.co.gregs.dbvolutiondemo;
+
 
 import nz.co.gregs.dbvolution.DBRow;
 import nz.co.gregs.dbvolution.annotations.*;
