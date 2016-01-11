@@ -4,21 +4,19 @@ package nz.co.gregs.dbvolutiondemo;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
-import nz.co.gregs.dbvolution.databases.H2DB;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
  * @author gregorygraham
  */
-public class DemoDB extends H2DB{
+
+// To use a different database,
+// change H2DB to any of the databases in 
+// nz.co.gregs.dbvolution.databases
+public class DemoDB extends nz.co.gregs.dbvolution.databases.H2DB{
 
 	public DemoDB() throws IOException, SQLException {
+		// The H2DB constructor takes a file, username, and password
 		super(new File("demodb"), "demo", "demo");
 	}
 	

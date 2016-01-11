@@ -25,20 +25,20 @@ public class Encounter extends DBRow {
 	@DBColumn
 	@DBPrimaryKey
 	@DBAutoIncrement
-	DBInteger encounter_pk = new DBInteger();
+	public DBInteger encounter_pk = new DBInteger();
 	
 	@DBColumn
-	DBString name = new DBString();
+	public DBString name = new DBString();
 	
 	@DBColumn
-	@DBForeignKey(Monster.class)
-	DBInteger monster = new DBInteger();
+	@DBForeignKey(Antagonist.class)
+	public DBInteger antagonist = new DBInteger();
 	
 	@DBColumn
-	DBInteger experienceEarned = new DBInteger();
+	public DBInteger experienceEarned = new DBInteger();
 	
 	@DBColumn
-	DBDate dateEncountered = new DBDate();
+	public DBDate dateEncountered = new DBDate();
 
 	public Encounter() {
 		super();
@@ -51,10 +51,10 @@ public class Encounter extends DBRow {
 		this.dateEncountered.setValue(date);
 	}
 
-	public Encounter(String name, Monster monster, Integer exp, Date date) {
+	public Encounter(String name, Antagonist anatagonist, Integer exp, Date date) {
 		super();
 		this.name.setValue(name);
-		this.monster.setValue(monster.monsterID.intValue());
+		this.antagonist.setValue(anatagonist.antagonistID.intValue());
 		this.experienceEarned.setValue(exp);
 		this.dateEncountered.setValue(date);
 	}

@@ -9,7 +9,7 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>dbvolution</artifactId>
-            <version>0.9.42</version>
+            <version>0.9.47</version>
         </dependency>
     </dependencies>
     <properties>
