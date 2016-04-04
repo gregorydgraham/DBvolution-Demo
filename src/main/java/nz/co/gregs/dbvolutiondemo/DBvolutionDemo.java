@@ -39,8 +39,8 @@ public class DBvolutionDemo {
 		demo.demonstrateAccessingEachRowWithOptionalTables();
 
 		// Thanks for trying this demo, I hope it helped.
-		// If you like DBvolution please support it by telling people about, 
-		// commenting on GitHub.
+		// If you like DBvolution please support it by telling people about it,
+		// or commenting on GitHub.
 		// 
 		// Thanks
 		// Greg
