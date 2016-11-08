@@ -12,6 +12,8 @@ import nz.co.gregs.dbvolution.exceptions.AutoCommitActionDuringTransactionExcept
 
 /**
  * A working demonstration of the simple use of DBvolution.
+ * 
+ * Creates a complete database, inserts data, and demonstrates several queries.
  *
  * @author gregorygraham
  */
@@ -19,6 +21,8 @@ public class DBvolutionDemo {
 
 	public static void main(String[] args) throws SQLException, IOException {
 		DBvolutionDemo demo = new DBvolutionDemo();
+		
+		// Create our database
 		demo.createDatabase();
 
 		// Now we need to create tables to store data in
