@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import nz.co.gregs.dbvolution.DBQuery;
 import nz.co.gregs.dbvolution.DBTable;
 
 import nz.co.gregs.dbvolution.exceptions.AccidentalBlankQueryException;
@@ -41,6 +44,8 @@ public class DBvolutionDemo {
 		demo.listRowsMatchingSimpleConditionsOnSeveralTablesWithAnOptionalTable();
 
 		demo.demonstrateAccessingEachRowWithOptionalTables();
+		
+		demo.displayTheDatabaseSchemaAsAQuery();
 
 		// Thanks for trying this demo, I hope it helped.
 		// If you like DBvolution please support it by telling people about it,
@@ -170,6 +175,17 @@ public class DBvolutionDemo {
 		System.out.println("");
 		System.out.println("VALUABLE ENCOUNTERS WITH AN ANTAGONIST INVOLVED");
 		database.print(allQueryRows);
+	}
+
+	private void displayTheDatabaseSchemaAsAQuery() {
+		DBQuery dbQuery = this.database.getDBQuery(new Antagonist()).setBlankQueryAllowed(true);
+		dbQuery.addAllConnectedTables();
+		dbQuery.displayQueryGraph();
+		try {
+			database.print(dbQuery.getAllRows());
+		} catch (SQLException | AccidentalBlankQueryException | AccidentalCartesianJoinException ex) {
+			Logger.getLogger(DBvolutionDemo.class.getName()).log(Level.SEVERE, null, ex);
+		}
 	}
 	
 	// This is an example of using subclassing to create permanently defined
