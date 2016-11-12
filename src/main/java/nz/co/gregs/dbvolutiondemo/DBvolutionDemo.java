@@ -36,7 +36,7 @@ public class DBvolutionDemo {
 
 		demo.listRowsMatchingSimpleConditionsOnSeveralTablesWithAnOptionalTable();
 
-		demo.demonstrateAccessingEachRowWithOptionalTables();
+		demo.accessingEachRowWithOptionalTables();
 
 		// Thanks for trying this demo, I hope it helped.
 		// If you like DBvolution please support it by telling people about, 
@@ -59,7 +59,7 @@ public class DBvolutionDemo {
 
 	}
 
-	protected void demonstrateAccessingEachRowWithOptionalTables() throws SQLException {
+	protected void accessingEachRowWithOptionalTables() throws SQLException {
 		// We're going to list all of the encounters that earned 100 or more experience
 		// and the antagonist involved
 		// So we need example Encounter and Antagonist objects
@@ -89,12 +89,13 @@ public class DBvolutionDemo {
 		System.out.println("VALUABLE ENCOUNTERS including THE ANTAGONIST INVOLVED");
 		for (nz.co.gregs.dbvolution.DBQueryRow queryRow : allQueryRows) {
 
-			// A DBQueryRow contains all the individual rows from the table 
+			// A DBQueryRow contains all the rows from the tables 
 			// that are associated with each other.
-			// Use the get method with an instance of the class you want to get
+			// Use the get method, with an instance of the class you want, to get
 			// the relevant row.
+			// Only the class is important so we can use our example object.
 			Encounter encounter = queryRow.get(encounterExample);
-			// Using blank instances is also ok
+			// Using new instances is also ok
 			Antagonist antagonist = queryRow.get(new Antagonist());
 
 			// Simple processing of the required rows
@@ -170,7 +171,7 @@ public class DBvolutionDemo {
 	
 	// This is an example of using subclassing to create permanently defined
 	// subsets of a table.
-	// These are very useful for creating multiple connections to a single table.
+	// These are very useful for creating multiple foreign keys between 2 tables.
 	public static class Valuable extends Encounter {
 
 		{
