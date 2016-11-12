@@ -171,7 +171,7 @@ public class DBvolutionDemo {
 	
 	// This is an example of using subclassing to create permanently defined
 	// subsets of a table.
-	// These are very useful for creating multiple foreign keys between 2 tables.
+	// These are very useful for creating multiple connection between 2 tables.
 	public static class Valuable extends Encounter {
 
 		{
