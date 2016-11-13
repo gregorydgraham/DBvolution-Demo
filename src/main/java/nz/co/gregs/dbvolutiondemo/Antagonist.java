@@ -15,6 +15,8 @@ import nz.co.gregs.dbvolution.datatypes.*;
  */
 public class Antagonist extends DBRow {
 
+	private static final long serialVersionUID = 1L;
+
 	@DBColumn
 	@DBPrimaryKey
 	@DBAutoIncrement
@@ -39,6 +41,8 @@ public class Antagonist extends DBRow {
 	// Some examples of pre-defined selections
 	static public class Dragon extends Antagonist {
 
+		private static final long serialVersionUID = 1L;
+
 		{
 			this.name.permittedPatternIgnoreCase("%dragon%");
 		}
@@ -46,12 +50,16 @@ public class Antagonist extends DBRow {
 
 	static public class NPC extends Antagonist {
 
+		private static final long serialVersionUID = 1L;
+
 		{
 			this.npc.permittedValues(Boolean.TRUE);
 		}
 	}
 
 	static public class Monster extends Antagonist {
+
+		private static final long serialVersionUID = 1L;
 
 		{
 			this.npc.permittedValues(Boolean.FALSE);

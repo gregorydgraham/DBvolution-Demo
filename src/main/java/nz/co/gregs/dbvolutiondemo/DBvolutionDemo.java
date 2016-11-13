@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import nz.co.gregs.dbvolution.DBQuery;
 import nz.co.gregs.dbvolution.DBTable;
 
 import nz.co.gregs.dbvolution.exceptions.AccidentalBlankQueryException;
@@ -13,12 +16,16 @@ import nz.co.gregs.dbvolution.exceptions.AutoCommitActionDuringTransactionExcept
 /**
  * A working demonstration of the simple use of DBvolution.
  *
+ * Creates a complete database, inserts data, and demonstrates several queries.
+ *
  * @author gregorygraham
  */
 public class DBvolutionDemo {
 
 	public static void main(String[] args) throws SQLException, IOException {
 		DBvolutionDemo demo = new DBvolutionDemo();
+
+		// Create our database
 		demo.createDatabase();
 
 		// Now we need to create tables to store data in
@@ -38,9 +45,11 @@ public class DBvolutionDemo {
 
 		demo.accessingEachRowWithOptionalTables();
 
+		demo.displayTheDatabaseSchemaAsAQuery();
+
 		// Thanks for trying this demo, I hope it helped.
-		// If you like DBvolution please support it by telling people about, 
-		// commenting on GitHub.
+		// If you like DBvolution please support it by telling people about it,
+		// or commenting on GitHub.
 		// 
 		// Thanks
 		// Greg
@@ -53,7 +62,7 @@ public class DBvolutionDemo {
 
 		// The very first thing required is a connection to the database
 		database = new DemoDB();
-		
+
 		// Print out the generated SQL before executing
 		database.setPrintSQLBeforeExecuting(true);
 
@@ -168,7 +177,18 @@ public class DBvolutionDemo {
 		System.out.println("VALUABLE ENCOUNTERS WITH AN ANTAGONIST INVOLVED");
 		database.print(allQueryRows);
 	}
-	
+
+	private void displayTheDatabaseSchemaAsAQuery() {
+		DBQuery dbQuery = this.database.getDBQuery(new Antagonist()).setBlankQueryAllowed(true);
+		dbQuery.addAllConnectedBaseTablesAsOptional();
+		dbQuery.displayQueryGraph();
+		try {
+			database.print(dbQuery.getAllRows());
+		} catch (SQLException | AccidentalBlankQueryException | AccidentalCartesianJoinException ex) {
+			Logger.getLogger(DBvolutionDemo.class.getName()).log(Level.SEVERE, null, ex);
+		}
+	}
+
 	// This is an example of using subclassing to create permanently defined
 	// subsets of a table.
 	// These are very useful for creating multiple connection between 2 tables.
@@ -182,17 +202,17 @@ public class DBvolutionDemo {
 	protected void listRowsFromTableWithPredefinedConditions() throws SQLException {
 		// We're going to list all of the encounters that earned 100 or more experience
 		// Using the Encounter subclass we've defined above.
-		final Valuable valuableExample 
+		final Valuable valuableExample
 				= new Valuable();
 
 		// Get a DBTable instance based on the example
-		final DBTable<Valuable> dbTable 
+		final DBTable<Valuable> dbTable
 				= database.getDBTable(valuableExample);
 
 		// Retreive all the interesting rows from the database using the DBTable
-		List<Valuable> allRows 
+		List<Valuable> allRows
 				= dbTable.setBlankQueryAllowed(true)
-						.getAllRows();
+				.getAllRows();
 
 		// Print out the results for demonstration purposes.
 		System.out.println("");
@@ -221,13 +241,32 @@ public class DBvolutionDemo {
 	}
 
 	private void createTables() {
-		try {
-			database.createTable(new Encounter());
-			database.createTable(new Antagonist());
-			tablesCreated = true;
-		} catch (SQLException | AutoCommitActionDuringTransactionException ex) {
-			; // An exception is thrown if the table already exists
-		}
+		database.createTablesNoExceptions(
+				new Encounter(),
+				new Antagonist(),
+				new Item(),
+				new Possessions());
+//		try {
+//			database.createTable(new Encounter());
+//		} catch (SQLException | AutoCommitActionDuringTransactionException ex) {
+//			; // An exception is thrown if the table already exists
+//		}
+//		try {
+//			database.createTable(new Antagonist());
+//		} catch (SQLException | AutoCommitActionDuringTransactionException ex) {
+//			;
+//		}
+//		try {
+//			database.createTable(new Item());
+//		} catch (SQLException | AutoCommitActionDuringTransactionException ex) {
+//			;
+//		}
+//		try {
+//			database.createTable(new Possessions());
+//		} catch (SQLException | AutoCommitActionDuringTransactionException ex) {
+//			;
+//		}
+		tablesCreated = true;
 	}
 
 	private void createData() throws SQLException {

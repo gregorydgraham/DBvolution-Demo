@@ -22,6 +22,8 @@ import nz.co.gregs.dbvolution.datatypes.DBString;
  */
 public class Encounter extends DBRow {
 
+	private static final long serialVersionUID = 1L;
+
 	@DBColumn
 	@DBPrimaryKey
 	@DBAutoIncrement
