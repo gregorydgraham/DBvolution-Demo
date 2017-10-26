@@ -11,7 +11,6 @@ import nz.co.gregs.dbvolution.DBTable;
 
 import nz.co.gregs.dbvolution.exceptions.AccidentalBlankQueryException;
 import nz.co.gregs.dbvolution.exceptions.AccidentalCartesianJoinException;
-import nz.co.gregs.dbvolution.exceptions.AutoCommitActionDuringTransactionException;
 
 /**
  * A working demonstration of the simple use of DBvolution.
@@ -211,25 +210,35 @@ public class DBvolutionDemo {
 
 		// Retreive all the interesting rows from the database using the DBTable
 		List<Valuable> allRows
-				= dbTable.setBlankQueryAllowed(true)
-				.getAllRows();
+				= dbTable
+						// We want to get all rows from the table so turn off blank query protection
+						.setBlankQueryAllowed(true)
+						// Retrieve all the rows
+						.getAllRows();
 
 		// Print out the results for demonstration purposes.
 		System.out.println("");
 		System.out.println("VALUABLE ENCOUNTERS from a predefined subselect");
+		// Database.print is a convenience method to print lists
 		database.print(allRows);
 	}
 
 	protected void listRowsMatchingSimpleConditionsFromOneTable() throws SQLException {
 		// We're going to list all of the encounters that earned 100 or more experience
-		// So we need an example Encounter object
+		// So we need an Encounter object to define the requirements of the query
 		final Encounter encounterExample = new Encounter();
-
+		
 		// limit the results to only encounters with 100 or more experienceEarned
 		encounterExample.experienceEarned.permittedRangeInclusive(100, null);
 
-		// Get a DBTable instance based on the example
-		final nz.co.gregs.dbvolution.DBTable<Encounter> dbTable = database.getDBTable(encounterExample);
+
+		// We'll also need a query object to run the query
+		// DBQuery, DBTable, and DBReport are options 
+		// We've got a very simple querythat only uses 1 table so we'll use a DBTable
+		final nz.co.gregs.dbvolution.DBTable<Encounter> dbTable;
+
+		// Get a DBTable instance based on the example from the database
+		dbTable= database.getDBTable(encounterExample);
 
 		// Retreive all the interesting rows from the database using the DBTable
 		List<Encounter> allRows = dbTable.getAllRows();
@@ -237,35 +246,18 @@ public class DBvolutionDemo {
 		// Print out the results for demonstration purposes.
 		System.out.println("");
 		System.out.println("VALUABLE ENCOUNTERS");
+		// Database.print is a convenience method to print lists
 		database.print(allRows);
 	}
 
 	private void createTables() {
+		// A table creation method to ensure the tables are exist.
+		// "NoExceptions" avoids any database exceptions about the tables already existing.
 		database.createTablesNoExceptions(
 				new Encounter(),
 				new Antagonist(),
 				new Item(),
 				new Possessions());
-//		try {
-//			database.createTable(new Encounter());
-//		} catch (SQLException | AutoCommitActionDuringTransactionException ex) {
-//			; // An exception is thrown if the table already exists
-//		}
-//		try {
-//			database.createTable(new Antagonist());
-//		} catch (SQLException | AutoCommitActionDuringTransactionException ex) {
-//			;
-//		}
-//		try {
-//			database.createTable(new Item());
-//		} catch (SQLException | AutoCommitActionDuringTransactionException ex) {
-//			;
-//		}
-//		try {
-//			database.createTable(new Possessions());
-//		} catch (SQLException | AutoCommitActionDuringTransactionException ex) {
-//			;
-//		}
 		tablesCreated = true;
 	}
 
