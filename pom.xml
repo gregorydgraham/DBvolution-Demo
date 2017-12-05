@@ -8,8 +8,8 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>dbvolution</artifactId>
-            <version>1.0.2</version>
+            <artifactId>dbvolution7</artifactId>
+            <version>0.9.8</version>
         </dependency>
     </dependencies>
     <properties>
