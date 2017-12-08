@@ -7,9 +7,9 @@
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>nz.co.gregs</groupId>
             <artifactId>dbvolution7</artifactId>
-            <version>0.9.8</version>
+            <version>0.9.10</version>
         </dependency>
     </dependencies>
     <properties>
