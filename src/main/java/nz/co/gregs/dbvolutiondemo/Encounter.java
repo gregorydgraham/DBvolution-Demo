@@ -7,6 +7,7 @@ import nz.co.gregs.dbvolution.annotations.DBAutoIncrement;
 import nz.co.gregs.dbvolution.annotations.DBColumn;
 import nz.co.gregs.dbvolution.annotations.DBForeignKey;
 import nz.co.gregs.dbvolution.annotations.DBPrimaryKey;
+import nz.co.gregs.dbvolution.annotations.DBRequiredTable;
 import nz.co.gregs.dbvolution.datatypes.DBDate;
 import nz.co.gregs.dbvolution.datatypes.DBInteger;
 import nz.co.gregs.dbvolution.datatypes.DBString;
@@ -20,6 +21,7 @@ import nz.co.gregs.dbvolution.datatypes.DBString;
  *
  * @author gregorygraham
  */
+@DBRequiredTable /* DBRequiredTable instructs the database to create this table if necessary */
 public class Encounter extends DBRow {
 
 	private static final long serialVersionUID = 1L;

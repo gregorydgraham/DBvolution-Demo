@@ -9,6 +9,7 @@ import nz.co.gregs.dbvolution.DBRow;
 import nz.co.gregs.dbvolution.annotations.DBAutoIncrement;
 import nz.co.gregs.dbvolution.annotations.DBColumn;
 import nz.co.gregs.dbvolution.annotations.DBPrimaryKey;
+import nz.co.gregs.dbvolution.annotations.DBRequiredTable;
 import nz.co.gregs.dbvolution.datatypes.DBInteger;
 import nz.co.gregs.dbvolution.datatypes.DBString;
 
@@ -16,6 +17,7 @@ import nz.co.gregs.dbvolution.datatypes.DBString;
  *
  * @author greg
  */
+@DBRequiredTable /* DBRequiredTable instructs the database to create this table if necessary */
 public class Item extends DBRow{
 
 	private static final long serialVersionUID = 1L;

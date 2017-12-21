@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import nz.co.gregs.dbvolution.DBQuery;
 import nz.co.gregs.dbvolution.DBTable;
+import nz.co.gregs.dbvolution.databases.DBDatabase;
 
 import nz.co.gregs.dbvolution.exceptions.AccidentalBlankQueryException;
 import nz.co.gregs.dbvolution.exceptions.AccidentalCartesianJoinException;
@@ -54,7 +55,7 @@ public class DBvolutionDemo {
 		// Greg
 	}
 
-	private nz.co.gregs.dbvolution.DBDatabase database;
+	private DBDatabase database;
 	private boolean tablesCreated = false;
 
 	private void createDatabase() throws SQLException, IOException {
@@ -253,11 +254,12 @@ public class DBvolutionDemo {
 	private void createTables() {
 		// A table creation method to ensure the tables are exist.
 		// "NoExceptions" avoids any database exceptions about the tables already existing.
-		database.createTablesNoExceptions(
-				new Encounter(),
-				new Antagonist(),
-				new Item(),
-				new Possessions());
+//		database.createTablesNoExceptions(
+//				new Encounter(),
+//				new Antagonist(),
+//				new Item(),
+//				new Possessions());
+		//We now use the @DBRequiredTable annotation to automatically create the tables
 		tablesCreated = true;
 	}
 

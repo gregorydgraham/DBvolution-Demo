@@ -5,3 +5,6 @@
 /demodb.mv.db.trace.db
 /demodb.trace.db
 /nbactions.xml
+/demoDB.sqlite
+/demoDB.h2.mv.db
+/demoDB.h2.trace.db

@@ -13,6 +13,7 @@ import nz.co.gregs.dbvolution.datatypes.*;
  *
  * @author gregorygraham
  */
+@DBRequiredTable /* DBRequiredTable instructs the database to create this table if necessary */
 public class Antagonist extends DBRow {
 
 	private static final long serialVersionUID = 1L;

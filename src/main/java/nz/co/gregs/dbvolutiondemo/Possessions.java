@@ -10,6 +10,7 @@ import nz.co.gregs.dbvolution.annotations.DBAutoIncrement;
 import nz.co.gregs.dbvolution.annotations.DBColumn;
 import nz.co.gregs.dbvolution.annotations.DBForeignKey;
 import nz.co.gregs.dbvolution.annotations.DBPrimaryKey;
+import nz.co.gregs.dbvolution.annotations.DBRequiredTable;
 import nz.co.gregs.dbvolution.annotations.DBTableName;
 import nz.co.gregs.dbvolution.datatypes.DBInteger;
 import nz.co.gregs.dbvolution.datatypes.DBNumber;
@@ -18,6 +19,7 @@ import nz.co.gregs.dbvolution.datatypes.DBNumber;
  *
  * @author greg
  */
+@DBRequiredTable /* DBRequiredTable instructs the database to create this table if necessary */
 @DBTableName("possessions")
 public class Possessions extends DBRow{
 
@@ -26,7 +28,7 @@ public class Possessions extends DBRow{
 	@DBPrimaryKey
 	@DBAutoIncrement
 	@DBColumn("antaposs_id")
-	public DBNumber posessionID = new DBNumber();
+	public DBInteger posessionID = new DBInteger();
 	
 	@DBColumn
 	@DBForeignKey(Antagonist.class)
