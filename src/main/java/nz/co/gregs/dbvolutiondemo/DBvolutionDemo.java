@@ -21,6 +21,8 @@ import nz.co.gregs.dbvolution.exceptions.AccidentalCartesianJoinException;
  * @author gregorygraham
  */
 public class DBvolutionDemo {
+	
+	private static final String nl = System.getProperty("line.separator");
 
 	public static void main(String[] args) throws SQLException, IOException {
 		DBvolutionDemo demo = new DBvolutionDemo();
@@ -47,12 +49,13 @@ public class DBvolutionDemo {
 
 		demo.displayTheDatabaseSchemaAsAQuery();
 
-		// Thanks for trying this demo, I hope it helped.
-		// If you like DBvolution please support it by telling people about it,
-		// or commenting on GitHub.
-		// 
-		// Thanks
-		// Greg
+		System.out.println(nl
+				+ "Thanks for trying this demo, I hope it helped." + nl
+				+ "If you like DBvolution please support it by telling people about it," + nl
+				+ "or commenting on GitHub." + nl
+				+ nl
+				+ "Thanks" + nl
+				+ "Greg");
 	}
 
 	private DBDatabase database;
