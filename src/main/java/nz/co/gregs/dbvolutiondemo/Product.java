@@ -18,7 +18,7 @@ import nz.co.gregs.dbvolution.datatypes.DBString;
  * @author greg
  */
 @DBRequiredTable /* DBRequiredTable instructs the database to create this table if necessary */
-public class Item extends DBRow{
+public class Product extends DBRow{
 
 	private static final long serialVersionUID = 1L;
 	

@@ -22,7 +22,7 @@ import nz.co.gregs.dbvolution.exceptions.AccidentalCartesianJoinException;
  */
 public class DBvolutionDemo {
 	
-	private static final String nl = System.getProperty("line.separator");
+	private static final String NEWLINE = System.getProperty("line.separator");
 
 	public static void main(String[] args) throws SQLException, IOException {
 		DBvolutionDemo demo = new DBvolutionDemo();
@@ -49,12 +49,12 @@ public class DBvolutionDemo {
 
 		demo.displayTheDatabaseSchemaAsAQuery();
 
-		System.out.println(nl
-				+ "Thanks for trying this demo, I hope it helped." + nl
-				+ "If you like DBvolution please support it by telling people about it," + nl
-				+ "or commenting on GitHub." + nl
-				+ nl
-				+ "Thanks" + nl
+		System.out.println(NEWLINE
+				+ "Thanks for trying this demo, I hope it helped." + NEWLINE
+				+ "If you like DBvolution please support it by telling people about it," + NEWLINE
+				+ "or commenting on GitHub." + NEWLINE
+				+ NEWLINE
+				+ "Thanks" + NEWLINE
 				+ "Greg");
 	}
 
@@ -72,24 +72,24 @@ public class DBvolutionDemo {
 	}
 
 	protected void accessingEachRowWithOptionalTables() throws SQLException {
-		// We're going to list all of the encounters that earned 100 or more experience
-		// and the antagonist involved
-		// So we need example Encounter and Antagonist objects
-		final Encounter encounterExample = new Encounter();
-		final Antagonist antagonistExample = new Antagonist();
+		// We're going to list all of the meetings that earned 100 or more commission
+		// and the customer involved
+		// So we need example Meeting and Customer objects
+		final Meeting meetingExample = new Meeting();
+		final Customer customerExample = new Customer();
 
-		// limit the results to only encounters with 100 or more experienceEarned
-		encounterExample.experienceEarned.permittedRangeInclusive(100, null);
+		// limit the results to only meetings with 100 or more commission
+		meetingExample.commissionEarned.permittedRangeInclusive(100, null);
 
 		// We'll need a DBQuery so we can use more than one table.
 		nz.co.gregs.dbvolution.DBQuery dbQuery
-				= database.getDBQuery(encounterExample);
+				= database.getDBQuery(meetingExample);
 
-		// and add an instance of Antagonist to the mix
+		// and add an instance of Customer to the mix
 		// Optional means we don't require this table to have 
 		// data connecting it to the rest of the query, 
 		// DBvolution will create an outer join to accomodate our instruction
-		dbQuery.addOptional(antagonistExample);
+		dbQuery.addOptional(customerExample);
 
 		// getting all the rows is similar to DBTable 
 		// but returns a collection of DBQueryRows
@@ -98,7 +98,7 @@ public class DBvolutionDemo {
 
 		// Now loop through the individual rows processing as you go
 		System.out.println("");
-		System.out.println("VALUABLE ENCOUNTERS including THE ANTAGONIST INVOLVED");
+		System.out.println("VALUABLE MEETINGS including THE CUSTOMER INVOLVED");
 		for (nz.co.gregs.dbvolution.DBQueryRow queryRow : allQueryRows) {
 
 			// A DBQueryRow contains all the rows from the tables 
@@ -106,43 +106,43 @@ public class DBvolutionDemo {
 			// Use the get method, with an instance of the class you want, to get
 			// the relevant row.
 			// Only the class is important so we can use our example object.
-			Encounter encounter = queryRow.get(encounterExample);
+			Meeting meeting = queryRow.get(meetingExample);
 			// Using new instances is also ok
-			Antagonist antagonist = queryRow.get(new Antagonist());
+			Customer customer = queryRow.get(new Customer());
 
 			// Simple processing of the required rows
-			System.out.println("" + encounter);
+			System.out.println("" + meeting);
 
 			// Watch out though!  
 			// Optional rows will be NULL if there is no relevant row
-			if (antagonist != null) {
-				System.out.println("" + antagonist);
+			if (customer != null) {
+				System.out.println("" + customer);
 			} else {
-				System.out.println("NO ANTAGONIST INVOLVED");
+				System.out.println("NO CUSTOMER INVOLVED");
 			}
 		}
 	}
 
 	protected void listRowsMatchingSimpleConditionsOnSeveralTablesWithAnOptionalTable() throws AccidentalBlankQueryException, SQLException, AccidentalCartesianJoinException {
 
-		// We're going to list all of the encounters that earned 100 or more experience
-		// and the antagonist involved
-		// So we need example Encounter and Antagonist objects
-		final Encounter encounterExample = new Encounter();
-		final Antagonist antagonistExample = new Antagonist();
+		// We're going to list all of the meetings that earned 100 or more commission
+		// and the customer involved
+		// So we need example Meeting and Customer objects
+		final Meeting meetingExample = new Meeting();
+		final Customer customerExample = new Customer();
 
-		// limit the results to only encounters with 100 or more experienceEarned
-		encounterExample.experienceEarned.permittedRangeInclusive(100, null);
+		// limit the results to only meetings with 100 or more commission
+		meetingExample.commissionEarned.permittedRangeInclusive(100, null);
 
 		// We'll need a DBQuery so we can use more than one table.
 		nz.co.gregs.dbvolution.DBQuery dbQuery
-				= database.getDBQuery(encounterExample);
+				= database.getDBQuery(meetingExample);
 
-		// and add an instance of Antagonist to the mix
+		// and add an instance of Customer to the mix
 		// Optional means we don't require this table to have 
 		// data connecting it to the rest of the query, 
 		// DBvolution will create an outer join to accomodate our instruction
-		dbQuery.addOptional(antagonistExample);
+		dbQuery.addOptional(customerExample);
 
 		// getting all the rows is similar to DBTable 
 		// but returns a collection of DBQueryRows
@@ -151,24 +151,24 @@ public class DBvolutionDemo {
 
 		// Printing them is just as easy
 		System.out.println("");
-		System.out.println("VALUABLE ENCOUNTERS (including THE ANTAGONIST if any)");
+		System.out.println("VALUABLE MEETINGS (including THE CUSTOMER if any)");
 		database.print(allQueryRows);
 	}
 
 	protected void listRowsMatchingSimpleConditionsOnSeveralTables() throws AccidentalBlankQueryException, SQLException, AccidentalCartesianJoinException {
 
-		// We're going to list all of the encounters that earned 100 or more experience
-		// and the antagonist involved
-		// So we need example Encounter and Antagonist objects
-		final Encounter encounterExample = new Encounter();
-		final Antagonist antagonistExample = new Antagonist();
+		// We're going to list all of the meetings that earned 100 or more commission
+		// and the customer involved
+		// So we need example Meeting and Customer objects
+		final Meeting meetingExample = new Meeting();
+		final Customer customerExample = new Customer();
 
-		// limit the results to only encounters with 100 or more experienceEarned
-		encounterExample.experienceEarned.permittedRangeInclusive(100, null);
+		// limit the results to only meetings with 100 or more commission
+		meetingExample.commissionEarned.permittedRangeInclusive(100, null);
 
 		// We'll need a DBQuery so we can use more than one table.
 		nz.co.gregs.dbvolution.DBQuery dbQuery
-				= database.getDBQuery(encounterExample, antagonistExample);
+				= database.getDBQuery(meetingExample, customerExample);
 
 		// getting all the rows is similar to DBTable 
 		// but returns a collection of DBQueryRows
@@ -177,12 +177,12 @@ public class DBvolutionDemo {
 
 		// Printing them is just as easy
 		System.out.println("");
-		System.out.println("VALUABLE ENCOUNTERS WITH AN ANTAGONIST INVOLVED");
+		System.out.println("VALUABLE MEETINGS WITH A CUSTOMER INVOLVED");
 		database.print(allQueryRows);
 	}
 
 	private void displayTheDatabaseSchemaAsAQuery() {
-		DBQuery dbQuery = this.database.getDBQuery(new Antagonist()).setBlankQueryAllowed(true);
+		DBQuery dbQuery = this.database.getDBQuery(new Customer()).setBlankQueryAllowed(true);
 		dbQuery.addAllConnectedBaseTablesAsOptional();
 		dbQuery.displayQueryGraph();
 		try {
@@ -195,25 +195,25 @@ public class DBvolutionDemo {
 	// This is an example of using subclassing to create permanently defined
 	// subsets of a table.
 	// These are very useful for creating multiple connection between 2 tables.
-	public static class Valuable extends Encounter {
+	public static class ValuableMeeting extends Meeting {
 
 		{
-			this.experienceEarned.permittedRangeInclusive(100, null);
+			this.commissionEarned.permittedRangeInclusive(100, null);
 		}
 	}
 
 	protected void listRowsFromTableWithPredefinedConditions() throws SQLException {
-		// We're going to list all of the encounters that earned 100 or more experience
-		// Using the Encounter subclass we've defined above.
-		final Valuable valuableExample
-				= new Valuable();
+		// We're going to list all of the meetings that earned 100 or more commission
+		// Using the Meeting subclass we've defined above.
+		final ValuableMeeting valuableExample
+				= new ValuableMeeting();
 
 		// Get a DBTable instance based on the example
-		final DBTable<Valuable> dbTable
+		final DBTable<ValuableMeeting> dbTable
 				= database.getDBTable(valuableExample);
 
 		// Retreive all the interesting rows from the database using the DBTable
-		List<Valuable> allRows
+		List<ValuableMeeting> allRows
 				= dbTable
 						// We want to get all rows from the table so turn off blank query protection
 						.setBlankQueryAllowed(true)
@@ -222,48 +222,49 @@ public class DBvolutionDemo {
 
 		// Print out the results for demonstration purposes.
 		System.out.println("");
-		System.out.println("VALUABLE ENCOUNTERS from a predefined subselect");
+		System.out.println("VALUABLE MEETINGS from a predefined subselect");
 		// Database.print is a convenience method to print lists
 		database.print(allRows);
 	}
 
 	protected void listRowsMatchingSimpleConditionsFromOneTable() throws SQLException {
-		// We're going to list all of the encounters that earned 100 or more experience
-		// So we need an Encounter object to define the requirements of the query
-		final Encounter encounterExample = new Encounter();
+		// We're going to list all of the meetings that earned 100 or more commission
+		// So we need an Meeting object to define the requirements of the query
+		final Meeting meetingExample = new Meeting();
 		
-		// limit the results to only encounters with 100 or more experienceEarned
-		encounterExample.experienceEarned.permittedRangeInclusive(100, null);
+		// limit the results to only meetings with 100 or more commission
+		meetingExample.commissionEarned.permittedRangeInclusive(100, null);
 
 
 		// We'll also need a query object to run the query
 		// DBQuery, DBTable, and DBReport are options 
 		// We've got a very simple querythat only uses 1 table so we'll use a DBTable
-		final nz.co.gregs.dbvolution.DBTable<Encounter> dbTable;
+		final nz.co.gregs.dbvolution.DBTable<Meeting> dbTable;
 
 		// Get a DBTable instance based on the example from the database
-		dbTable= database.getDBTable(encounterExample);
+		dbTable= database.getDBTable(meetingExample);
 
 		// Retreive all the interesting rows from the database using the DBTable
-		List<Encounter> allRows = dbTable.getAllRows();
+		List<Meeting> allRows = dbTable.getAllRows();
 
 		// Print out the results for demonstration purposes.
 		System.out.println("");
-		System.out.println("VALUABLE ENCOUNTERS");
+		System.out.println("VALUABLE MEETINGS");
 		// Database.print is a convenience method to print lists
 		database.print(allRows);
 	}
 
 	private void createTables() {
-		// A table creation method to ensure the tables are exist.
-		// "NoExceptions" avoids any database exceptions about the tables already existing.
-//		database.createTablesNoExceptions(
-//				new Encounter(),
-//				new Antagonist(),
-//				new Item(),
-//				new Possessions());
-		//We now use the @DBRequiredTable annotation to automatically create the tables
+		//We use the @DBRequiredTable annotation to automatically create the tables
 		tablesCreated = true;
+		
+		// However a table creation method to ensure the tables exist.
+		// "NoExceptions" avoids any database exceptions about the tables already existing.
+		/*database.createTablesNoExceptions(
+				new Meeting(),
+				new Customer(),
+				new Item(),
+				new Possessions());*/
 	}
 
 	private void createData() throws SQLException {
@@ -271,25 +272,25 @@ public class DBvolutionDemo {
 		// only insert if the tables are freshly created
 		if (tablesCreated) {
 
-			//Create some antagonists to fight
-			//Note that the antagonists will not have valid IDs 
+			//Create some customers to meet
+			//Note that the customers will not have valid IDs 
 			//until they're inserted into the database
-			Antagonist goblin = new Antagonist("Goblin");
-			Antagonist guard = new Antagonist("Guard");
-			Antagonist dragon = new Antagonist("Dragon");
-			database.insert(goblin, guard, dragon);
+			Customer gordon = new Customer("Gordon");
+			Customer gwen = new Customer("Gwen");
+			Customer dahab = new Customer("Dahab");
+			database.insert(gordon, gwen, dahab);
 
-			//Now that the antagonists have been inserted 
+			//Now that the customers have been inserted 
 			//they have valid IDs 
-			//and we can create some encounters
-			Encounter encounter1 = new Encounter("First encounter", goblin, 20, new Date());
-			Encounter encounter2 = new Encounter("Taking the guardtower", guard, 100, new Date());
-			Encounter encounter3 = new Encounter("Slaying the dragon", dragon, 30000, new Date());
+			//and we can create some meetings
+			Meeting meeting1 = new Meeting("Introduction meeting", gordon, 20, new Date());
+			Meeting meeting2 = new Meeting("Pitch meeting", gwen, 100, new Date());
+			Meeting meeting3 = new Meeting("Service level agreement", dahab, 30000, new Date());
 
-			//This one doesn't have a antagonist, 
+			//This one doesn't have a customer, 
 			//and will demonstrate outer joins later
-			Encounter encounter4 = new Encounter("Defeating the trap", 300, new Date());
-			database.insert(encounter1, encounter2, encounter3, encounter4);
+			Meeting meeting4 = new Meeting("Brainstorming", 300, new Date());
+			database.insert(meeting1, meeting2, meeting3, meeting4);
 		}
 	}
 

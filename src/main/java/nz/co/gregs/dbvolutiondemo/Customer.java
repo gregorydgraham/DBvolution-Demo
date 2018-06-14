@@ -14,56 +14,56 @@ import nz.co.gregs.dbvolution.datatypes.*;
  * @author gregorygraham
  */
 @DBRequiredTable /* DBRequiredTable instructs the database to create this table if necessary */
-public class Antagonist extends DBRow {
+public class Customer extends DBRow {
 
 	private static final long serialVersionUID = 1L;
 
 	@DBColumn
 	@DBPrimaryKey
 	@DBAutoIncrement
-	public DBInteger antagonistID = new DBInteger();
+	public DBInteger customerID = new DBInteger();
 
 	@DBColumn
 	public DBString name = new DBString();
 
 	@DBColumn
-	public DBBoolean npc = new DBBoolean();
+	public DBBoolean hasAgent = new DBBoolean();
 
-	public Antagonist(String name) {
+	public Customer(String name) {
 		super();
 		this.name.setValue(name);
-		this.npc.setValue(false);
+		this.hasAgent.setValue(false);
 	}
 
-	public Antagonist() {
+	public Customer() {
 		super();
 	}
 
 	// Some examples of pre-defined selections
-	static public class Dragon extends Antagonist {
+	static public class Dahab extends Customer {
 
 		private static final long serialVersionUID = 1L;
 
 		{
-			this.name.permittedPatternIgnoreCase("%dragon%");
+			this.name.permittedPatternIgnoreCase("%dahab%");
 		}
 	}
 
-	static public class NPC extends Antagonist {
+	static public class CustomerWithAgent extends Customer {
 
 		private static final long serialVersionUID = 1L;
 
 		{
-			this.npc.permittedValues(Boolean.TRUE);
+			this.hasAgent.permittedValues(Boolean.TRUE);
 		}
 	}
 
-	static public class Monster extends Antagonist {
+	static public class Prospect extends Customer {
 
 		private static final long serialVersionUID = 1L;
 
 		{
-			this.npc.permittedValues(Boolean.FALSE);
+			this.hasAgent.permittedValues(Boolean.FALSE);
 		}
 	}
 
