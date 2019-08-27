@@ -21,7 +21,7 @@ public class DemoDB extends DBDatabaseCluster{
 
 	public DemoDB() throws IOException, SQLException {
 		// You don't need to use a cluster but when it's this easy why not :)
-		super(
+		super("Demo Database",
 				new H2DB(new File("demoDB.h2"), "demo", "demo"),
 				new H2MemoryDB("demoDBMemory", "demo", "demo", true),
 				new SQLiteDB(new File("demoDB.sqlite"), "demo", "demo")

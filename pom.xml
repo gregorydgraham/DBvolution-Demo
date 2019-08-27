@@ -8,8 +8,8 @@
     <dependencies>
         <dependency>
             <groupId>nz.co.gregs</groupId>
-            <artifactId>dbvolution7</artifactId>
-            <version>0.9.12</version>
+            <artifactId>dbvolution10</artifactId>
+            <version>0.9.1</version>
         </dependency>
     </dependencies>
     <properties>
